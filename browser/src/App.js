@@ -37,6 +37,10 @@ const MNVPage = lazy(() => import('./MNVPage/MNVPage'))
 const StructuralVariantPage = lazy(() => import('./StructuralVariantPage/StructuralVariantPage'))
 const VariantPage = lazy(() => import('./VariantPage/VariantPage'))
 
+const VariantCooccurrencePage = lazy(() =>
+  import('./VariantCooccurrencePage/VariantCooccurrencePage')
+)
+
 // Other pages
 const PageNotFoundPage = lazy(() => import('./PageNotFoundPage'))
 const SearchRedirectPage = lazy(() => import('./SearchRedirectPage'))
@@ -222,6 +226,16 @@ const App = () => {
                       <p>Variant IDs must be chrom-pos-ref-alt or rsIDs.</p>
                     </Page>
                   )
+                }}
+              />
+
+              <Route
+                exact
+                path="/variant-cooccurrence"
+                render={({ location }) => {
+                  const params = queryString.parse(location.search)
+                  const datasetId = params.dataset || defaultDataset
+                  return <VariantCooccurrencePage datasetId={datasetId} />
                 }}
               />
 
